@@ -4,5 +4,8 @@
     <string name="app_name">arithmeticae</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="tower_height_label">Tower height:</string>
+    <string name="tower_height_default_value">0 m.</string>
+    <string name="live_label">❤</string>
 
 </resources>
