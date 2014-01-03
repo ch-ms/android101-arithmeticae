@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
 		ec.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		ec.addView(label); ec.addView(result);
 		
-		equationsContainer.addView(ec);
+		equationsContainer.addView(ec, 0);
 		
 		result.setOnKeyListener(new OnKeyListener(){
 			public boolean onKey(View v, int keyCode, KeyEvent event){
