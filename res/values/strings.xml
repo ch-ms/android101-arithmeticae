@@ -9,5 +9,7 @@
     <string name="live_label">❤</string>
     <string name="height_unit">m.</string>
     <string name="times_sign">×</string>
+    <string name="game_over_label">Game is over because your lives count does not belong anymore to the natural numbers.</string>
+    <string name="restart_button">Restart</string>
 
 </resources>

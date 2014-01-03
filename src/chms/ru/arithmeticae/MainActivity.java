@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -219,6 +220,25 @@ public class MainActivity extends Activity {
 			Log.i("checkGameOver", "game is over");
 			
 			removeEditFromCurrentEquation();
+			
+			LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT); 
+			
+			TextView gameOverLabel = new TextView(this);
+			gameOverLabel.setLayoutParams(lp);
+			gameOverLabel.setTextSize(22);
+			gameOverLabel.setText(R.string.game_over_label);
+			
+			Button restart = new Button(this);
+			restart.setLayoutParams(lp);
+			restart.setTextSize(22);
+			restart.setText(R.string.restart_button);
+			
+			equationsContainer.addView(restart, 0);
+			equationsContainer.addView(gameOverLabel, 0);
+			
+			restart.setOnClickListener(new View.OnClickListener(){
+				public void onClick(View v) { initialize(); }
+			});
 		}
 	}
 
