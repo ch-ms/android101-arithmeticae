@@ -4,9 +4,7 @@ import java.util.Random;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -122,12 +120,31 @@ public class MainActivity extends Activity {
 		result.setOnKeyListener(new OnKeyListener(){
 			public boolean onKey(View v, int keyCode, KeyEvent event){
 				if( event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER ){
-					Log.i("result.setOnKeyListener.onKey", "Done is pressed!");
+					Log.i("result.setOnKeyListener.onKey", "done is pressed!");
+					String answer = ((EditText)v).getText().toString();
+					checkUserAnswer(Integer.parseInt(answer));
 					return true;
 				}
 				return false;
 			}
 		});
+	}
+	
+	/**
+	 * Checks user answer, if it's correct add another identity
+	 * Otherwise take one live from user
+	 * If lives count is zero game is over
+	 * @param {int} answer User answer
+	 */
+	protected void checkUserAnswer(int answer){
+		Log.i("checkUserAnswer", "user answer is " + answer + ", right answer is " + currentFirst*currentSecond);
+		if(answer==currentFirst*currentSecond){
+			// answer is correct
+			Log.i("checkUserAnswer", "answer is correct");
+		}else{
+			// answer is incorrect
+			Log.i("checkUserAnswer", "answer is incorrect");
+		}
 	}
 
 	@Override
