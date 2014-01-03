@@ -200,7 +200,17 @@ public class MainActivity extends Activity {
 		
 		setCurrentLives(currentLives-1);
 		
-		// TODO: if currentlives <= 0 then game over
+		checkGameOver();
+	}
+	
+	/**
+	 * Checks for game over state
+	 */
+	protected void checkGameOver(){
+		if( currentLives<=0 ){
+			// Game is over
+			Log.i("checkGameOver", "game is over");
+		}
 	}
 
 	@Override
