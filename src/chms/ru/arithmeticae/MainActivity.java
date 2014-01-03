@@ -175,13 +175,7 @@ public class MainActivity extends Activity {
 	protected void correctAnswer(int answer){
 		Log.i("correctAnswer", "given answer " + answer + " is correct");
 		
-		// Add equation answer to equation text
-		String equationText = currentEquationLabel.getText().toString();
-		currentEquationLabel.setText(equationText + answer);
-
-		// Remove equation user answer from currentEquation
-		currentEquationContainer.removeView(currentEquationEdit);
-		
+		removeEditFromCurrentEquation();
 		currentEquationContainer.setBackgroundColor(Color.TRANSPARENT);
 		
 		// This must be below because it changes currentEquation***
@@ -204,12 +198,27 @@ public class MainActivity extends Activity {
 	}
 	
 	/**
+	 * Removes edit from currentEquation and put it content to label
+	 */
+	protected void removeEditFromCurrentEquation(){
+		// Add equation answer to equation text
+		String equationText = currentEquationLabel.getText().toString();
+		String answerText = currentEquationEdit.getText().toString();
+		currentEquationLabel.setText(equationText + answerText);
+
+		// Remove equation user answer from currentEquation
+		currentEquationContainer.removeView(currentEquationEdit);	
+	}
+	
+	/**
 	 * Checks for game over state
 	 */
 	protected void checkGameOver(){
 		if( currentLives<=0 ){
 			// Game is over
 			Log.i("checkGameOver", "game is over");
+			
+			removeEditFromCurrentEquation();
 		}
 	}
 
