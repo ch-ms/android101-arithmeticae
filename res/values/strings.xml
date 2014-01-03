@@ -6,7 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="tower_height_label">Tower height:</string>
     <string name="tower_height_default_value">0 m.</string>
-    <string name="live_label">❤</string>
+    <string name="live_label">♥</string>
     <string name="height_unit">m.</string>
     <string name="times_sign">×</string>
     <string name="game_over_label">Game is over because your lives count does not belong anymore to the natural numbers.</string>
