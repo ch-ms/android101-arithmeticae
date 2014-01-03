@@ -4,6 +4,7 @@ import java.util.Random;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.EditText;
@@ -84,23 +85,28 @@ public class MainActivity extends Activity {
 	/**
 	 * Adds new identity to tower
 	 */
-	// TODO: Правильные параметры у вьюшек
 	private void addNewIdentity(){
 		Log.i("addNewIdentity", "");
-		Random random = new Random();
 		
+		Random random = new Random();
 		currentFirst  = random.nextInt(NUM_UPPER_BOUND);
 		currentSecond = random.nextInt(NUM_UPPER_BOUND);
 		
 		Log.i("addNewIdentity", "first: " + currentFirst + " second: " + currentSecond);
 		
+		LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		
 		String timesSign = getString(R.string.times_sign);
+		
 		TextView label = new TextView(this);
-		label.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		label.setLayoutParams(layoutParams);
+		label.setTextSize(24);
 		label.setText(currentFirst + " " + timesSign + " " + currentSecond + " = ");
 		
 		EditText result = new EditText(this);
-		result.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		result.setLayoutParams(layoutParams);
+		result.setTextSize(24);
+		result.setInputType(InputType.TYPE_CLASS_NUMBER);
 		
 		LinearLayout ec = new LinearLayout(this);
 		ec.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
