@@ -141,6 +141,7 @@ public class MainActivity extends Activity {
 		if(answer==currentFirst*currentSecond){
 			// answer is correct
 			Log.i("checkUserAnswer", "answer is correct");
+			addNewIdentity();
 		}else{
 			// answer is incorrect
 			Log.i("checkUserAnswer", "answer is incorrect");
