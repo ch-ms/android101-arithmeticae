@@ -4,9 +4,14 @@ import java.util.Random;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnKeyListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -113,6 +118,16 @@ public class MainActivity extends Activity {
 		ec.addView(label); ec.addView(result);
 		
 		equationsContainer.addView(ec);
+		
+		result.setOnKeyListener(new OnKeyListener(){
+			public boolean onKey(View v, int keyCode, KeyEvent event){
+				if( event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER ){
+					Log.i("result.setOnKeyListener.onKey", "Done is pressed!");
+					return true;
+				}
+				return false;
+			}
+		});
 	}
 
 	@Override
