@@ -59,6 +59,8 @@ public class MainActivity extends Activity {
 	 */
 	private void initialize(){
 		Log.i("Initialize", "start");
+		
+		equationsContainer.removeAllViews();
 		 
 		Log.i("Initialize", "set lives to" + START_LIVES);
 		setCurrentLives(START_LIVES);
