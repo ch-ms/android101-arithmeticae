@@ -124,7 +124,7 @@ public class MainActivity extends Activity {
 		currentEquationLabel.setText(currentFirst + " " + timesSign + " " + currentSecond + " = ");
 		
 		currentEquationEdit = new EditText(this);
-		currentEquationEdit.setLayoutParams(layoutParams);
+		currentEquationEdit.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		currentEquationEdit.setTextSize(24);
 		currentEquationEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
 		

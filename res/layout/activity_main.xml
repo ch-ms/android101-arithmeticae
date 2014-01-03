@@ -33,6 +33,7 @@
 	        android:layout_toRightOf="@id/tower_height_label"
 	        android:text="@string/tower_height_default_value"
 	        android:textSize="18sp" 
+	        android:layout_marginLeft="8dp"
         	/>
         
         <TextView
