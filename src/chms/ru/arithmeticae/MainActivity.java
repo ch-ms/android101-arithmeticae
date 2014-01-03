@@ -31,6 +31,11 @@ public class MainActivity extends Activity {
 	protected int currentFirst;
 	protected int currentSecond;
 	
+	// Current identity view
+	protected LinearLayout currentEquationContainer;
+	protected TextView     currentEquationLabel;
+	protected EditText     currentEquationEdit;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -101,25 +106,26 @@ public class MainActivity extends Activity {
 		
 		String timesSign = getString(R.string.times_sign);
 		
-		TextView label = new TextView(this);
-		label.setLayoutParams(layoutParams);
-		label.setTextSize(24);
-		label.setText(currentFirst + " " + timesSign + " " + currentSecond + " = ");
+		currentEquationLabel = new TextView(this);
+		currentEquationLabel.setLayoutParams(layoutParams);
+		currentEquationLabel.setTextSize(24);
+		currentEquationLabel.setText(currentFirst + " " + timesSign + " " + currentSecond + " = ");
 		
-		EditText result = new EditText(this);
-		result.setLayoutParams(layoutParams);
-		result.setTextSize(24);
-		result.setInputType(InputType.TYPE_CLASS_NUMBER);
+		currentEquationEdit = new EditText(this);
+		currentEquationEdit.setLayoutParams(layoutParams);
+		currentEquationEdit.setTextSize(24);
+		currentEquationEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
 		
-		LinearLayout ec = new LinearLayout(this);
-		ec.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-		ec.addView(label); ec.addView(result);
+		currentEquationContainer = new LinearLayout(this);
+		currentEquationContainer.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		currentEquationContainer.addView(currentEquationLabel);
+		currentEquationContainer.addView(currentEquationEdit);
 		
-		equationsContainer.addView(ec, 0);
+		equationsContainer.addView(currentEquationContainer, 0);
 		
-		result.requestFocus();
+		currentEquationEdit.requestFocus();
 		
-		result.setOnKeyListener(new OnKeyListener(){
+		currentEquationEdit.setOnKeyListener(new OnKeyListener(){
 			public boolean onKey(View v, int keyCode, KeyEvent event){
 				if( event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER ){
 					Log.i("result.setOnKeyListener.onKey", "done is pressed!");
@@ -149,13 +155,36 @@ public class MainActivity extends Activity {
 		}
 		
 		if(iAnswer==currentFirst*currentSecond){
-			// answer is correct
-			Log.i("checkUserAnswer", "answer is correct");
-			addNewIdentity();
+			correctAnswer(iAnswer);
 		}else{
-			// answer is incorrect
-			Log.i("checkUserAnswer", "answer is incorrect");
+			incorrectAnswer(iAnswer);
 		}
+	}
+	
+	/**
+	 * Correct answer handler
+	 * @param {int} answer User answer
+	 */
+	protected void correctAnswer(int answer){
+		Log.i("correctAnswer", "given answer " + answer + " is correct");
+		
+		// Add equation answer to equation text
+		String equationText = currentEquationLabel.getText().toString();
+		currentEquationLabel.setText(equationText + answer);
+
+		// Remove equation user answer from currentEquation
+		currentEquationContainer.removeView(currentEquationEdit);
+		
+		// This must be below because it changes currentEquation***
+		addNewIdentity();
+	}
+	
+	/**
+	 * Incorrect answer handler
+	 * @param {int} answer User answer
+	 */
+	protected void incorrectAnswer(int answer){
+		Log.i("checkUserAnswer", "answer is incorrect");
 	}
 
 	@Override
