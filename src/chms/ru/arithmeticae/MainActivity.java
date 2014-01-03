@@ -117,12 +117,14 @@ public class MainActivity extends Activity {
 		
 		equationsContainer.addView(ec, 0);
 		
+		result.requestFocus();
+		
 		result.setOnKeyListener(new OnKeyListener(){
 			public boolean onKey(View v, int keyCode, KeyEvent event){
 				if( event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER ){
 					Log.i("result.setOnKeyListener.onKey", "done is pressed!");
 					String answer = ((EditText)v).getText().toString();
-					checkUserAnswer(Integer.parseInt(answer));
+					checkUserAnswer(answer);
 					return true;
 				}
 				return false;
@@ -134,11 +136,19 @@ public class MainActivity extends Activity {
 	 * Checks user answer, if it's correct add another identity
 	 * Otherwise take one live from user
 	 * If lives count is zero game is over
-	 * @param {int} answer User answer
+	 * @param {String} answer User answer
 	 */
-	protected void checkUserAnswer(int answer){
+	protected void checkUserAnswer(String answer){
 		Log.i("checkUserAnswer", "user answer is " + answer + ", right answer is " + currentFirst*currentSecond);
-		if(answer==currentFirst*currentSecond){
+		
+		int iAnswer; // answer converted to integer
+		try{
+			iAnswer = Integer.parseInt(answer);
+		}catch(NumberFormatException e){
+			return; // if answer can't be converted to integer then return
+		}
+		
+		if(iAnswer==currentFirst*currentSecond){
 			// answer is correct
 			Log.i("checkUserAnswer", "answer is correct");
 			addNewIdentity();
