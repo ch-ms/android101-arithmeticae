@@ -3,7 +3,9 @@ package chms.ru.arithmeticae;
 import java.util.Random;
 
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
 import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -15,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+@SuppressLint("ResourceAsColor")
 public class MainActivity extends Activity {
 
 	protected final int START_LIVES = 3;
@@ -25,7 +28,9 @@ public class MainActivity extends Activity {
 	protected TextView livesTextView;
 	protected TextView heightCountTextView;
 	protected LinearLayout equationsContainer;
+	
 	protected int currentHeight = 0;
+	protected int currentLives;
 	
 	// First & second multipliers
 	protected int currentFirst;
@@ -79,6 +84,8 @@ public class MainActivity extends Activity {
 	 * @param {int} value Lives count
 	 */
 	private void setCurrentLives(int value){
+		currentLives = value;
+		
 		String liveIcon = getString(R.string.live_label);
 		
 		String lives = "";
@@ -175,6 +182,8 @@ public class MainActivity extends Activity {
 		// Remove equation user answer from currentEquation
 		currentEquationContainer.removeView(currentEquationEdit);
 		
+		currentEquationContainer.setBackgroundColor(Color.TRANSPARENT);
+		
 		// This must be below because it changes currentEquation***
 		addNewIdentity();
 	}
@@ -185,6 +194,13 @@ public class MainActivity extends Activity {
 	 */
 	protected void incorrectAnswer(int answer){
 		Log.i("checkUserAnswer", "answer is incorrect");
+		
+		currentEquationContainer.setBackgroundColor(getResources().getColor(R.color.incorrect_answer));
+		currentEquationEdit.requestFocus();
+		
+		setCurrentLives(currentLives-1);
+		
+		// TODO: if currentlives <= 0 then game over
 	}
 
 	@Override
