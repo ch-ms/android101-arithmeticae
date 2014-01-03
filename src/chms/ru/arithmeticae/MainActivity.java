@@ -23,6 +23,8 @@ public class MainActivity extends Activity {
 
 	protected final int START_LIVES = 3;
 	protected final int START_HEIGHT = 0;
+	// How much height will be increased then solving one identity
+	protected final int HEIGHT_MODIFIER = 5; 
 	
 	protected final int NUM_UPPER_BOUND = 10;
 	
@@ -180,6 +182,8 @@ public class MainActivity extends Activity {
 		
 		removeEditFromCurrentEquation();
 		currentEquationContainer.setBackgroundColor(Color.TRANSPARENT);
+		
+		setCurrentHeight(currentHeight+HEIGHT_MODIFIER);
 		
 		// This must be below because it changes currentEquation***
 		addNewIdentity();
